@@ -11,9 +11,7 @@
             <small>it all starts here</small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Examples</a></li>
-            <li class="active">Blank page</li>
+            <li><a href="#"><i class="ion ion-person-add"></i> User Registration</a></li>
         </ol>
     </section>
 
@@ -29,7 +27,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form action="/Create" method="post">
+                    <form action="/Create/user" method="post">
                         @csrf
 
                         <div class="box-body">

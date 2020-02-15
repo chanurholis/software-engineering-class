@@ -29,7 +29,9 @@
     
     <li><a href="/"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
     <li><a href="/User"><i class="fa fa-users"></i> <span>Users</span></a></li>
-    <li><a href="/Student"><i class="fa fa-user"></i> <span>Student</span></a></li>
+    <li><a href="/Create/user"><i class="ion ion-person-add"></i> <span>User Registration</span></a></li>
+    <li><a href="/Create/user/import"><i class="fa fa-upload"></i> <span>Import User Registration</span></a></li>
+    <li><a href="/Student"><i class="fa fa-user"></i> <span>Students</span></a></li>
 
     <li class="header">LABELS</li>
     <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
