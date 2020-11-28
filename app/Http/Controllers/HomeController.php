@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Student;
 use Session;
 use App\Exports\UserExport;
 use App\Imports\UserImport;
@@ -14,8 +15,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $user = DB::table('users')->orderBy('name', 'ASC')->paginate(10);
-        $student = DB::table('students')->orderBy('student_name', 'ASC')->paginate(10);
+        $user = User::orderBy('name', 'ASC')->paginate(10);
+        $student = Student::orderBy('student_name', 'ASC')->paginate(10);
 
         return view('index', [
             'user' => $user,
@@ -25,7 +26,7 @@ class HomeController extends Controller
 
     public function user()
     {
-        $user = DB::table('users')->orderBy('name', 'ASC')->paginate(10);
+        $user = User::orderBy('name', 'ASC')->paginate(10);
         return view('users.users', compact('user'));
     }
 
@@ -33,7 +34,7 @@ class HomeController extends Controller
     {
         $keyword = $request->keyword;
 
-        $user = DB::table('users')->where('name', 'like', '%' . $keyword . '%')->paginate();
+        $user = User::where('name', 'like', '%' . $keyword . '%')->paginate();
 
         return view('users.search', compact('user'));
     }
@@ -58,7 +59,6 @@ class HomeController extends Controller
 
     public function show(User $user)
     {
-        // return $user;
         return view('users.show', compact('user'));
     }
 
