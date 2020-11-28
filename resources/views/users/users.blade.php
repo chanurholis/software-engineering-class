@@ -1,12 +1,12 @@
 @extends('layouts.main')
 
-@section('title','RPL | HOME')
+@section('title','RPL | USERS')
 
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Home
+            Users
             <small>it all starts here</small>
         </h1>
         <ol class="breadcrumb">
@@ -30,7 +30,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a href="/Create" class="btn btn-primary"><i class="fa fa-plus"></i> Add</a>
+                        <a href="/User/export" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export</a>
                         <div class="box-tools">
                         <form action="/User" method="post">
                             @method('post')
@@ -81,7 +81,7 @@
                                     <tr>
                                         <th class="text-center">Page</th>
                                         <th class="text-center">Users</th>
-                                        <th class="text-center">Data</th>
+                                        <th class="text-center">Data Perpage</th>
                                     </tr>
                                 </thead>
                                     <tr>

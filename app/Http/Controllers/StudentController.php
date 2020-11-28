@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Student;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Contracts\DataTable;
 
 class StudentController extends Controller
 {
@@ -82,5 +83,19 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         //
+    }
+
+    public function dataTable()
+    {
+        $model = Student::query();
+        return DataTablesDataTables::of($model)
+            ->addColumn('action', function ($model) {
+                return view('students.index', [
+                    'model' => $model
+                ]);
+            })
+            ->addIndexColumn()
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }

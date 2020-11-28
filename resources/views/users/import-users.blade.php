@@ -1,13 +1,13 @@
 @extends('layouts.main')
 
-@section('title','RPL | EDIT')
+@section('title','RPL | IMPORT')
 
 @section('content')
 
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Edit
+            Create
             <small>it all starts here</small>
         </h1>
         <ol class="breadcrumb">
@@ -29,24 +29,15 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form action="/User/{{$user->id}}" method="post">
-                        @method('patch')
-                        @csrf
+                    <form action="/Create/user/import" method="post" enctype="multipart/form-data">
+                        {{csrf_field()}}
 
                         <div class="box-body">
 
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" name="name" value="{{$user->name}}" id="name" placeholder="Enter name" autofocus>
-                                @error('name')
-                                    <small class="text-danger">{{$message}}</small>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">Email address</label>
-                                <input type="email" class="form-control" name="email" value="{{$user->email}}" id="email" placeholder="Enter email">
-                                @error('email')
+                                <label for="file">File Excel</label>
+                                <input type="file" class="form-control" name="file" id="file">
+                                @error('file')
                                     <small class="text-danger">{{$message}}</small>
                                 @enderror
                             </div>
@@ -55,7 +46,7 @@
                         <!-- /.box-body -->
 
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> Update</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
 
                     </form>

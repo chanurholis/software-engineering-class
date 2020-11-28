@@ -2,16 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Student;
+use Session;
+use App\Exports\UserExport;
+use App\Imports\UserImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\User;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HomeController extends Controller
 {
     public function index()
     {
-        $user = DB::table('users')->orderBy('name', 'ASC')->paginate(10);
-        $student = DB::table('students')->orderBy('student_name', 'ASC')->paginate(10);
+        $user = User::orderBy('name', 'ASC')->paginate(10);
+        $student = Student::orderBy('student_name', 'ASC')->paginate(10);
 
         return view('index', [
             'user' => $user,
@@ -21,7 +26,7 @@ class HomeController extends Controller
 
     public function user()
     {
-        $user = DB::table('users')->orderBy('name', 'ASC')->paginate(10);
+        $user = User::orderBy('name', 'ASC')->paginate(10);
         return view('users.users', compact('user'));
     }
 
@@ -29,7 +34,7 @@ class HomeController extends Controller
     {
         $keyword = $request->keyword;
 
-        $user = DB::table('users')->where('name', 'like', '%' . $keyword . '%')->paginate();
+        $user = User::where('name', 'like', '%' . $keyword . '%')->paginate();
 
         return view('users.search', compact('user'));
     }
@@ -54,7 +59,6 @@ class HomeController extends Controller
 
     public function show(User $user)
     {
-        // return $user;
         return view('users.show', compact('user'));
     }
 
@@ -83,5 +87,35 @@ class HomeController extends Controller
             ]);
 
         return redirect('/User')->with('status', 'Data successfully changed.');
+    }
+
+    public function export()
+    {
+        return Excel::download(new UserExport, 'user.xlsx');
+    }
+
+
+    public function create_import()
+    {
+        return view('users.import-users');
+    }
+
+    public function import(Request $request)
+    {
+        $this->validate($request, [
+            'file' => 'required'
+        ]);
+
+        $file = $request->file('file');
+
+        $fileName = rand() . $file->getClientOriginalName();
+
+        $file->move('userFile', $fileName);
+
+        Excel::import(new UserImport, public_path('/userFile/' . $fileName));
+
+        Session::flash('status', 'Data import successfully');
+
+        return redirect('/User');
     }
 }

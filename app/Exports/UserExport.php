@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\UserModelExport;
+use App\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
 class UserExport implements FromCollection
@@ -12,6 +12,6 @@ class UserExport implements FromCollection
      */
     public function collection()
     {
-        return UserModelExport::all();
+        return User::all();
     }
 }

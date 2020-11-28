@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title','RPL | HOME')
+@section('title','RPL | STUDENTS')
 
 @section('content')
     <!-- Content Header (Page header) -->
@@ -25,7 +25,6 @@
         </div>
         @endif
 
-        @if ($student)
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
@@ -35,7 +34,7 @@
                     <div class="box-body">
                         <div class="box-body table-responsive no-padding">   
 
-                            <table id="example2" class="table table-bordered table-striped table-responsive table-hover">
+                            <table id="student" class="table table-bordered table-striped table-responsive table-hover">
                                 <thead>
                                     <tr>
                                         <th class="text-center">#</th>
@@ -51,7 +50,7 @@
                                         <td class="text-center">{{$loop->iteration}}</td>
                                         <td>{{$s->student_name}}</td>
                                         <td class="text-center"><span class="label label-success">Active</span></td>
-                                    <td class="text-center"><a href="/User/{{$s->student_id}}" class="label label-info">Detail</a> <a href="/User/{{$s->student_id}}/edit" class="label label-primary">Update</a></td>
+                                        <td class="text-center"><a href="/User/{{$s->student_id}}" class="label label-info">Detail</a> <a href="/User/{{$s->student_id}}/edit" class="label label-primary">Update</a></td>
                                     </tr>
                                     @endforeach
                                     </tbody>
@@ -73,11 +72,22 @@
         </div>
         <!-- /.row -->
 
-        @else
-        {{'EMPTY'}}
-        @endif
-
     </section>
     <!-- /.content -->
 
 @endsection
+
+<script>
+    $('#student').DataTable({
+        responsive: true,
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('table.student') }}",
+        columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'name'},
+            {data: 'status', name: 'status'},
+            {data: 'action', name: 'action'},
+        ]
+    });
+</script>

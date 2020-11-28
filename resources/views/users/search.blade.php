@@ -24,12 +24,12 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Responsive Hover Table</h3>
+                        <a href="/User/export" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Export</a>
                         <div class="box-tools">
-                        <form action="{{''}}" method="post">
+                        <form action="/User" method="post">
                             @method('post')
                             @csrf
-                            <div class="input-group input-group-sm hidden-xs" style="width: 150px;">
+                            <div class="input-group input-group-sm hidden-xs" style="width: 200px; margin-top: 5px;">
                                 <input type="text" name="keyword" class="form-control pull-right" placeholder="Search">
                                 <div class="input-group-btn">
                                     <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
@@ -60,7 +60,7 @@
                                         <td>{{$u->email}}</td>
                                         <td>{{$u->created_at}}</td>
                                         <td class="text-center"><span class="label label-success">Active</span></td>
-                                        <td class="text-center"><a href="" class="label label-info">Detail</a> <a href="" class="label label-primary">Update</a></td>
+                                        <td class="text-center"><a href="/User/{{$u->id}}" class="label label-info">Detail</a> <a href="/User/{{$u->id}}/edit" class="label label-primary">Update</a></td>
                                     </tr>
                                     @endforeach
                                     </tbody>
